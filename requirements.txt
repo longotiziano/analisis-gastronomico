@@ -8,3 +8,4 @@ tabula-py
 jpype
 matplotlib
 seaborn
+unidecode
