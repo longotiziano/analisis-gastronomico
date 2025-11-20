@@ -142,6 +142,7 @@ def detectar_outliers_iqr(df: pd.DataFrame, col: str) -> pd.DataFrame:
     lim_inf = Q1 - 1.5 * IQR
     lim_sup = Q3 + 1.5 * IQR
     
+    # Formo el DataFrame que contiene a los outliers
     outliers = df[(df[col] < lim_inf) | (df[col] > lim_sup)]
     return outliers
 

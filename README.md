@@ -1,6 +1,6 @@
 # Análisis de Desperdicios y Ventas de un Restaurante
 Este proyecto analiza el impacto económico de las fugas de stock en un restaurante. 
-A partir de datos simulados con precios reales de mayoristas argentinos, estima pérdidas por categoría y predice ahorros posibles con la implementación de un sistema de gestión.
+A partir de datos simulados con precios reales de **mayoristas argentinos**, estima pérdidas por categoría y predice ahorros posibles con la implementación de un sistema de gestión.
 
 ## Objetivo del proyecto
 - Identificar las pérdidas (desde anuales hasta diarias) dadas a las fugas no identificadas
@@ -11,11 +11,12 @@ A partir de datos simulados con precios reales de mayoristas argentinos, estima 
 ## Estructura
 ```
 analisis-de-desperdicios/
-│-- data/                # datasets limpios y crudos
-│-- notebook.ipynb       # análisis principal
-│-- dashboard.png        # captura del dashboard
-│-- requirements.txt     # librerías usadas
-│-- README.md            # este archivo
+|-- data/                # datasets limpios y crudos
+|-- notebooks/           # análisis principal
+|-- scripts/             # lógica reutilizable y tareas
+|-- dashboard.png        # captura del dashboard
+|-- requirements.txt     # librerías usadas
+|-- README.md            # este archivo
 ```
 
 ## Tecnologías utilizadas
@@ -25,10 +26,10 @@ analisis-de-desperdicios/
 - Power BI, para el diseño del dashboard
 
 ## Proceso de análisis
-### **Exploración inicial y Búsqueda de datasets**
+### Exploración inicial y Búsqueda de datasets
 Para este proyecto se utilizó una combinación de **datasets simulados** y **fuentes reales** con el objetivo de representar el funcionamiento de un restaurante promedio.
  
-#### **1. `Restaurant_Data.xlsx`**  
+#### 1. `Restaurant_Data.xlsx`
 Dataset principal con el histórico de ventas y costos del restaurante ficticio.
 
 **Hoja: Orders**
@@ -45,6 +46,8 @@ Dataset principal con el histórico de ventas y costos del restaurante ficticio.
 - `Item Name`: Nombre del item (Coffe, Beer, Burguers...) 
 - `Price`: Costo del item (en dólares)
 - `Cost`: Costo de producción
+
+> **Nota:**: La columna de `costos` no fue utilizada durante el análisis, ya que este mismo está centrando en el mercado argentino.
 
 ### Otras fuentes consultadas
 Además del dataset principal, se analizaron:
@@ -64,9 +67,23 @@ Luego de haber identificado en el **Exploratory Data Analysis** (EDA) las tareas
 - Formateo a `snake_case`
 - Pasado a unidades en común (ej: precio en g -> precio en kg)
 - Conversión de tipo de cambio
-- Identificación de outliers (ya que previamente los datasets estaban sucios)
+- Paso a mercado argentino
 - Agregado de métricas y cálculos que dejan listos los datos para ser graficados
 
 > **Aclaración sobre la traducción del dataset**
 >
-> La traducción del dataset fue ejecutada con la librería `deep_translator`, y si bien es la más estable, suelen demorar mucho sus procesos. Esto era grave, ya que relentizaba todo el notebook por una simple traducción de ~200 celdas, por lo que decidí manejarla de manera externa con el script `traducir_df.py`, que traduce externamente y almacena en un CSV, aumentando así de manera drástica la velocidad del código. 
+> La traducción del dataset fue ejecutada con la librería `deep_translator`, y si bien es la más estable, suelen demorar mucho sus procesos. Esto era grave, ya que relentizaba todo el notebook por una simple traducción de ~1500 celdas, por lo que decidí manejarla de manera externa con el script `traducir_df.py`, que traduce externamente y almacena en un CSV, aumentando así de manera drástica la velocidad del código. 
+
+---
+
+#### Paso al mercado argentino
+
+En el paso a mercado argentino me enfrenté a un problema: el dataset del restaurante y el del INDEC utilizan esquemas distintos, lo que hacia imposible su comparación directa.\
+Para resolverlo, se creó un diccionario de equivalencias, donde cada categoría/subcategoría del restaurante fue mapeada a una categoría homogénea equivalente del INDEC.
+
+**Limitaciones conocidas**
+- Se pierde algo de granularidad a nivel producto final.
+- Algunas recetas podrían tener composiciones diferentes según el restaurante.
+- Los costos estimados representan un promedio de mercado, no una receta específica.
+
+Aun así, este método es adecuado para un análisis económico general, comparaciones temporales y estimación del impacto del desperdicio dentro de un restaurante promedio.
