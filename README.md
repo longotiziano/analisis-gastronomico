@@ -26,7 +26,7 @@ analisis-de-desperdicios/
 - Power BI, para el diseño del dashboard
 
 ## Proceso de análisis
-### Exploración inicial y Búsqueda de datasets
+### 1. Exploración inicial y Búsqueda de datasets
 Para este proyecto se utilizó una combinación de **datasets simulados** y **fuentes reales** con el objetivo de representar el funcionamiento de un restaurante promedio.
  
 #### 1. `Restaurant_Data.xlsx`
@@ -55,12 +55,11 @@ Además del dataset principal, se analizaron:
 - **Artículos y reportes sectoriales** relacionados a desperdicio en gastronomía  
 - **Publicaciones de mayoristas** para estimar costos reales  
 
-> Más detalles sobre cada dataset, supuestos y estructura en:  
-> `data/README.md`
+> Más detalles sobre cada dataset, supuestos y estructura en `data/README.md`
 
 --- 
 
-### Data Wrangling
+### 2. Data Wrangling
 Luego de haber identificado en el **Exploratory Data Analysis** (EDA) las tareas encomendadas, se realizaron diversas tareas:
 - Eliminación de valores nulos
 - Traducción de DataFrames
@@ -76,10 +75,15 @@ Luego de haber identificado en el **Exploratory Data Analysis** (EDA) las tareas
 
 ---
 
-#### Paso al mercado argentino
+### 3. Paso al mercado argentino
+En el paso a mercado argentino me enfrenté a un problema: el dataset del restaurante y el del INDEC **utilizan esquemas distintos**, lo que hacia imposible su comparación directa.\
+Para resolverlo, se creó un diccionario de equivalencias (con IA), donde cada categoría/subcategoría del restaurante fue mapeada a una categoría homogénea equivalente del INDEC.
 
-En el paso a mercado argentino me enfrenté a un problema: el dataset del restaurante y el del INDEC utilizan esquemas distintos, lo que hacia imposible su comparación directa.\
-Para resolverlo, se creó un diccionario de equivalencias, donde cada categoría/subcategoría del restaurante fue mapeada a una categoría homogénea equivalente del INDEC.
+**Beneficios del enfoque**
+- Reduce la probabilidad de errores por falta de coincidencias exactas.
+- Permite usar precios reales sin necesidad de replicar recetas individuales.
+- Mantiene consistencia entre datasets muy diferentes.
+- Hace el proyecto más escalable y realista.
 
 **Limitaciones conocidas**
 - Se pierde algo de granularidad a nivel producto final.
@@ -87,3 +91,19 @@ Para resolverlo, se creó un diccionario de equivalencias, donde cada categoría
 - Los costos estimados representan un promedio de mercado, no una receta específica.
 
 Aun así, este método es adecuado para un análisis económico general, comparaciones temporales y estimación del impacto del desperdicio dentro de un restaurante promedio.
+
+> Para más información acerca de la estrategia implementada y detalles técnicos asistir a `paso_mer_arg.ipynb`
+
+---
+
+### 4. Reporte en Power BI
+Finalmente, desarrollé un reporte en Power BI, donde analizo, explico y muestro las diversas métricas y KPIs que me parecieron de valor para este
+escenario hipotético.
+
+**KPIs:**
+- **Desperdicio general** -> % y $
+- **Ganancia de categorías afectada** -> % (ej: pérdida de ganancia de un 7% en [categoría])
+- Comparación temporal de ventas **con y sin optimización**
+
+**Insights:**
+- Productos con más pérdidas 

@@ -88,7 +88,7 @@ def transformar_unidades(df: pd.DataFrame) -> pd.DataFrame:
             avisos.append((variedad, udm, "Unidad desconocida"))
             continue
 
-        precio_kg = precio / cantidad
+        precio_kg = round((precio / cantidad), 2)
 
         lista_de_dicts.append({
             "variedad": variedad,

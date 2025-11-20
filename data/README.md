@@ -51,5 +51,4 @@ La literatura revisada muestra niveles de merma de entre **4% y 17%** dependiend
 Para este proyecto se adopta un valor de referencia del:
 
 # **10% de desperdicio promedio**
-
 Este número se utiliza para estimar pérdidas económicas en el restaurante ficticio, y constituye un parámetro clave en el modelo analítico.
