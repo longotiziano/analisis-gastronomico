@@ -1,4 +1,4 @@
-materias_primas = {
+catego_materias_primas = {
     "panificados_y_harinas": [
         "pan_frances_tipo_flauta",
         "pan_de_mesa",

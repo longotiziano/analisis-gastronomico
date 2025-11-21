@@ -20,11 +20,26 @@ Ambos utilizan estructuras completamente diferentes, lo que hacía imposible cal
 ---
 
 ### Metodología y supuestos
-- Se asumió una estructura promedio de recetas
+- Se asumió una estructura promedio de recetas tal que la suma de sus valores es igual a 5.
+- Reviso sub-categorías de platos (las categorías sin indiferentes porque refiere a la carta, no al plato en sí)
 - Los pesos no representan cantidades exactas
 - Se privilegió la consistencia
-- Diseño escalable
 
+**Ejemplo**:
+```python
+{
+    'hamburguesas': {
+        'carnes': 3,
+        'panificados': 2, # Cada diccionario suma 5 puntos
+        'verduras': 1
+    },
+    'ensaladas': {
+        'verduras': 4
+        'aceites': 1
+    }
+    # etc...
+}
+```
 ---
 
 ### Beneficios del enfoque
@@ -41,3 +56,12 @@ Ambos utilizan estructuras completamente diferentes, lo que hacía imposible cal
 - Los costos estimados representan un promedio de mercado, no una receta específica.
 
 Aun así, este método es adecuado para un análisis económico general, comparaciones temporales y estimación del impacto del desperdicio dentro de un restaurante promedio.
+
+---
+
+### Archivos
+Los archivos contenidos en el directorio cumplen diversas responsabilidades:
+- `asignar_equivalencias.py`: Funciones auxiliares que serán exportadas al notebook para asignar las categorías
+- `categorias_indec.py`: Contiene el diccionario que le asigna al dataset del INDEC sus categorías
+- `equivalencias_pesos`: Diccionario que asigna las subcategorías del dataset de `Items` una cantidad numérica de las categorías del INDEC
+
