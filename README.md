@@ -1,94 +1,146 @@
-# Análisis de Desperdicios y Ventas de un Restaurante
-Este proyecto analiza el impacto económico de las fugas de stock en un restaurante. 
-A partir de datos simulados con precios reales de **mayoristas argentinos**, estima pérdidas por categoría y predice ahorros posibles con la implementación de un sistema de gestión.
+# Análisis Gastronómico – Documentación General
 
-## Objetivo del proyecto
-- Identificar las pérdidas (desde anuales hasta diarias) dadas a las fugas no identificadas
-- Qué platos se están viendo mayormente afectados, para dar soluciones más específicas
-- Demostrar los resultados luego de las optimizaciones
-- Explicar la importancia de la implementación de estos sistemas y el abandono de las viejas y malas costumbres
+Este repositorio contiene la **base del proyecto** de análisis gastronómico. Aquí se encuentran únicamente los elementos **compartidos** entre las dos investigaciones principales, cada una desarrollada en su propia branch.
 
-## Estructura
+El branch `main` no incluye análisis finales, sino:
+- Datos crudos y limpios
+- Scripts base
+- Diccionarios y equivalencias
+- Notebooks de preparación
+- Infraestructura común
+
+Las investigaciones completas se encuentran en branches separados.
+
+---
+
+## Arquitectura del Proyecto
+
+El proyecto se compone de **dos análisis independientes**, que parten del mismo dataset base pero con objetivos completamente distintos:
+
+---
+
+### **Branch 1: `desperdicios-optimizacion`**
+
+**Objetivo:**  
+Analizar el rendimiento del restaurante, detectar fugas de stock, calcular desperdicios y estimar el ahorro potencial mediante una correcta gestión.
+
+Incluye:
+- Identificación de pérdidas 
+- Impacto económico en categorías
+- Proyección de ahorro tras la optimización
+- KPIs y métricas de negocio
+- Dashboard final
+
+Este análisis está centrado exclusivamente en el **funcionamiento operativo del restaurante**.
+
+---
+
+### **Branch 2: `comparacion-eeuu-argentina`** (en proceso)
+
+**Objetivo:**  
+Comparar el costo de elaboración de distintos platos entre **Argentina** y **Estados Unidos**.
+
+Incluye:
+- Precios mayoristas argentinos vs. precios mayoristas estadounidenses
+- Costo por receta en ambos mercados
+- Diferencias económicas y proporciones
+- Visualizaciones comparativas
+
+Este análisis no utiliza métricas del restaurante ni KPIs operativos.  
+Es un estudio económico **externo e independiente**.
+
+---
+
+## Contenido de `main`
 ```
-analisis-de-desperdicios/
-|-- data/                # datasets limpios y crudos
-|-- notebooks/           # análisis principal
-|-- scripts/             # lógica reutilizable y tareas
-|-- equivalencias/       # diccionarios utilizados en equivalencias
-|-- dashboard.png        # captura del dashboard
-|-- requirements.txt     # librerías usadas
-|-- README.md            # este archivo
+analisis-gastronomico/
+|-- data/ # datos crudos, limpios y staging
+|-- scripts/ # scripts reutilizables
+|-- notebooks/ # notebooks de preprocesamiento y wrangling
+|-- equivalencias/ # diccionarios y mapeos usados para unificar categorías
+|-- requirements.txt # dependencias del proyecto
+|-- README.md # este archivo
 ```
+
+---
 
 ## Tecnologías utilizadas
-- Python, utilizando Jupyter Notebooks
-- Pandas, para la limpieza y procesado de datasets
-- Matplotlib, para el graficado y análisis de datos
-- Power BI, para el diseño del dashboard
 
-## Proceso de análisis
-### 1. Exploración inicial y Búsqueda de datasets
-Para este proyecto se utilizó una combinación de **datasets simulados** y **fuentes reales** con el objetivo de representar el funcionamiento de un restaurante promedio.
- 
+- **Python** (Jupyter Notebooks)  
+- **Pandas** -> limpieza, feature engineering y transformación  
+- **Matplotlib** -> visualizaciones base  
+- **Power BI** -> dashboard de análisis  
+- **Git + Git branches** -> arquitectura del proyecto  
+
+---
+
+## Proceso General
+
+### 1. Exploración inicial y búsqueda de datasets
+El proyecto utiliza una combinación de **datasets simulados** y **precios reales** obtenidos de mayoristas y reportes del INDEC.
+
 #### `Restaurant_Data.xlsx`
-Dataset principal con el histórico de ventas y costos del restaurante ficticio.
-
-> **Nota:**: La columna Cost (costo de producción en USD) no se utilizó en este análisis, ya que el enfoque se centra en costos del mercado argentino obtenidos de fuentes locales.
+Dataset base con ventas y recetas del restaurante ficticio.
 
 ### Otras fuentes consultadas
-Además del dataset principal, se analizaron:
-- **Informe de precios del INDEC (`informe_indec.pdf`)**  
-- **Artículos y reportes sectoriales** relacionados a desperdicio en gastronomía  
+- Informe de precios del **INDEC**  
+- Reportes del sector gastronómico  
+- Fuentes complementarias para precios internacionales 
+- APIs para consultado de cotizaciones 
 
-> Más detalles sobre cada dataset, supuestos y estructura en `data/README.md`
-
---- 
-
-### 2. Data Wrangling
-Luego de haber identificado en el **Exploratory Data Analysis** (EDA) las tareas encomendadas, se realizaron diversas tareas:
-- Eliminación de valores nulos
-- Traducción de DataFrames
-- Formateo a `snake_case`
-- Pasado a unidades en común (ej: precio en g -> precio en kg)
-- Conversión de tipo de cambio
-
-> **Nota**: La traducción del dataset fue aislada debido a tópicos de optimización, para más información acudir a `scripts/README.md` 
+Para más información revisar: `data/README.md`
 
 ---
 
-### 3. Feature Engineering
-En esta etapa se generan nuevas variables, métricas y KPIs que aportan valor al análisis del negocio.
-- Paso a mercado argentino
-- Agregado de métricas y cálculos que dejan listos los datos para ser graficados
-- KPIs
-- Insights
+### 2. Data Wrangling 
 
-**KPIs:**
-- **Desperdicio general** -> % y $
-- **Ganancia de categorías afectada** -> % (ej: pérdida de ganancia de un 7% en [categoría])
-- Comparación temporal de ventas **con y sin optimización**
+Tareas realizadas en esta etapa:
+- Eliminación de nulos  
+- Estandarización a `snake_case`  
+- Unificación de unidades (g -> kg)  
+- Conversión de moneda cuando corresponde  
+- Limpieza general del dataset para que ambas branches lo utilicen igual  
 
-#### Paso a mercado argentino
-
-En el paso a mercado argentino me enfrenté a un problema: el dataset del restaurante y el del INDEC **utilizan esquemas distintos**, lo que hacia imposible su comparación directa.\
-Para resolverlo, se crearon diccionarios de equivalencias (con IA), donde cada categoría/subcategoría del restaurante fue mapeada a una categoría homogénea equivalente del INDEC. 
-
-> En caso de querer revisión, los diccionarios se encuentran en el directorio `equivalencias/`
-
-> Para más información acerca de la estrategia implementada y detalles técnicos asistir a `feature-engineering.ipynb`
+> La traducción de columnas se mantuvo aislada para optimizar performance. Detalles en `scripts/README.md`.
 
 ---
 
-### 4. Reporte en Power BI
-Finalmente, desarrollé un reporte en Power BI, donde analizo, explico y muestro las diversas métricas y KPIs que me parecieron de valor para este
-escenario hipotético.
+### 3. Equivalencias y paso a mercado argentino
 
-**Insights clave encontrados:**
-- Productos con más pérdidas 
+El dataset del restaurante posee categorías propias, mientras que el INDEC maneja un esquema completamente distinto.  
+Para permitir análisis conjuntos, se generaron:
+
+- Diccionarios de mapeo entre categorías  
+- Equivalencias entre subcategorías  
+- Unificación de criterios de clasificación  
+
+Para más información revisar: `equivalencias/README.md`
 
 ---
 
-### Diagrama de flujo de datos:
+## Instrucciones de uso
+
+### 1. Instalar dependencias
+
+```bash
+pip install -r requirements.txt
 ```
-Raw Data -> EDA -> Wrangling -> Feature Engineering -> KPIs -> Dashboard
+
+### 2. Abrir los notebooks base
+
+Los notebooks dentro de `/notebooks` generan los datasets limpios que luego consumen las branches.
+
+### 3. Cambiar de branchs según análisis
+```bash
+git checkout desperdicios-optimizacion
+# o
+git checkout comparacion-eeuu-argentina
 ```
+
+Cada branch contiene su propio README explicando el análisis completo.
+
+## Nota final
+
+Este repositorio está diseñado para escalar a múltiples análisis gastronómicos que compartan una misma base de datos y proceso de preparación.
+Cada nueva investigación deberá implementarse como una branch independiente.
+

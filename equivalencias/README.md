@@ -61,7 +61,6 @@ Aun así, este método es adecuado para un análisis económico general, compara
 
 ### Archivos
 Los archivos contenidos en el directorio cumplen diversas responsabilidades:
-- `asignar_equivalencias.py`: Funciones auxiliares que serán exportadas al notebook para asignar las categorías
 - `categorias_indec.py`: Contiene el diccionario que le asigna al dataset del INDEC sus categorías
-- `equivalencias_pesos`: Diccionario que asigna las subcategorías del dataset de `Items` una cantidad numérica de las categorías del INDEC
+- `equivalencias_pesos.py`: Diccionario que asigna las subcategorías del dataset de `Items` una cantidad numérica de las categorías del INDEC
 
