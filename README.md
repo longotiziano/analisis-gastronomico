@@ -150,6 +150,6 @@ Los esfuerzos de mejora deberían enfocarse en áreas de mayor impacto financier
 
 ## Dashboard final
 
-![Reporte Final](reporte-analítico.png)
+![Reporte Final](reporte-final.png)
 
 
