@@ -65,7 +65,7 @@ Dataset base con ventas y recetas del restaurante ficticio.
 - Fuentes complementarias para precios internacionales 
 - APIs para consulta de cotizaciones 
 
-Para más información revisar: `data/README.md`
+> Para más información revisar: `data/README.md`
 
 ---
 
@@ -91,7 +91,7 @@ Para permitir análisis conjuntos, se generaron:
 - Equivalencias entre subcategorías  
 - Unificación de criterios de clasificación  
 
-Para más información revisar: `equivalencias/README.md`
+> Para más información revisar: `equivalencias/README.md`
 
 ---
 
@@ -122,7 +122,7 @@ eda.ipinb -> data_wrangling.ipynb -> paso_mercado.ipynb -> analisis_final.ipynb
 
 ## Resultados principales
 - Ahorro porcentual máximo estimado: **0.97%** sobre ganancia mensual
-- Ahorro monetario (en un año): **$53.08M** de **$4.37B** (en pesos)
+- Ahorro monetario (en un año): **$53.08M** de **$4.37B** (en ARS)
 
 > Los valores que obtuve puede que no sean los mismos que usted obtenga, ya que puede ser alterado por el dataset original, traducción o cotización del dólar
 
@@ -131,7 +131,7 @@ eda.ipinb -> data_wrangling.ipynb -> paso_mercado.ipynb -> analisis_final.ipynb
 ## Conclusión Final del Proyecto
 
 El análisis integral de desperdicios, precios mayoristas y estructura de costos demuestra que la optimización de fugas de stock en restaurantes argentinos tiene un impacto económico marginal.
-Incluso aplicando un escenario conservador de control total de desperdicios, la mejora potencial en la rentabilidad es inferior al 1% de la ganancia mensual.
+Incluso aplicando un escenario conservador de control total de desperdicios, la mejora potencial en la rentabilidad es inferior al 1% de la ganancia total.
 
 Este incremento resulta insuficiente para justificar la implementación de un sistema de gestión adicional, considerando:
 - Costos de licencias y mantenimiento de software
